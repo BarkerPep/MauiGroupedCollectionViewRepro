@@ -2,8 +2,10 @@ using System.Collections.ObjectModel;
 
 namespace MauiGroupedCollectionViewRepro;
 
-public sealed class GroupedCollectionViewModel
+public sealed class GroupedCollectionViewModel : ViewModelBase
 {
+    private string? _selectedItem;
+
     public GroupedCollectionViewModel() => InitializeItems();
 
     private void InitializeItems()
@@ -21,4 +23,10 @@ public sealed class GroupedCollectionViewModel
     }
 
     public ObservableCollection<ItemGroup> Items { get; } = new();
+
+    public string? SelectedItem
+    {
+        get => _selectedItem;
+        set => SetField(ref _selectedItem, value);
+    }
 }

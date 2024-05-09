@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MauiGroupedCollectionViewRepro"
+             x:Class="MauiGroupedCollectionViewRepro.GroupedListPage"
+             Title="List">
+
+    <ContentPage.BindingContext>
+        <local:GroupedCollectionViewModel />
+    </ContentPage.BindingContext>
+
+    <Grid
+        Padding="30,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Text="{Binding SelectedItem, StringFormat='{}Selected Item: {0}', FallbackValue='No item selected'}" />
+        <Button Grid.Column="0" Grid.Row="1"
+                Text="View Grouped Collection"
+                Clicked="CollectionButton_OnClicked" />
+        <Button Grid.Column="1" Grid.Row="1"
+                Text="View Simple Collection"
+                Clicked="SimpleButton_OnClicked" />
+        <ListView Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2"
+                  ItemsSource="{Binding Items}"
+                  SelectedItem="{Binding SelectedItem}"
+                  SelectionMode="Single"
+                  IsGroupingEnabled="True">
+            <ListView.GroupHeaderTemplate>
+                <DataTemplate x:DataType="local:ItemGroup">
+                    <ViewCell>
+                        <VerticalStackLayout Spacing="0">
+                            <Label VerticalTextAlignment="End"
+                                   Padding="16,14,16,6"
+                                   Text="{Binding Key}" />
+                            <BoxView HorizontalOptions="FillAndExpand"
+                                     HeightRequest="1"
+                                     VerticalOptions="EndAndExpand" />
+                        </VerticalStackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.GroupHeaderTemplate>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Label Text="{Binding .}"
+                               Padding="32, 11"
+                               FontSize="17"
+                               HorizontalTextAlignment="Start"
+                               VerticalTextAlignment="Center"
+                               VerticalOptions="Center" />
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+
+</ContentPage>

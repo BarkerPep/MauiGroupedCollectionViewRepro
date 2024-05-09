@@ -63,11 +63,18 @@
       <MauiXaml Update="SimpleCollectionPage.xaml">
         <SubType>Designer</SubType>
       </MauiXaml>
+      <MauiXaml Update="GroupedListPage.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
     </ItemGroup>
 
     <ItemGroup>
       <Compile Update="SimpleCollectionPage.xaml.cs">
         <DependentUpon>SimpleCollectionPage.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="GroupedListPage.xaml.cs">
+        <DependentUpon>GroupedListPage.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
     </ItemGroup>
